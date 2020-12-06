@@ -23,8 +23,11 @@ public class Comment {
 
     @ManyToOne private Person person;
 
-    public Comment(CommentBody body, Person person) {
+    @ManyToOne private Post post;
+
+    public Comment(CommentBody body, Person person, Post post) {
         this.body = body;
         this.person = person;
+        this.post = post;
     }
 }

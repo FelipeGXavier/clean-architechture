@@ -1,7 +1,9 @@
 package com.demo.clean.blog.infra.http;
 
+import com.demo.clean.blog.adapters.CreateCommentRequest;
 import com.demo.clean.blog.adapters.CreatePostRequest;
 import com.demo.clean.blog.adapters.UpdatePostLinkRequest;
+import com.demo.clean.blog.application.CommentPost;
 import com.demo.clean.blog.application.CreatePost;
 import com.demo.clean.blog.application.UpdatePostLink;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,13 @@ public class PostController {
 
     private final CreatePost createPostUseCase;
     private final UpdatePostLink updatePostLinkUseCase;
+    private final CommentPost commentPostUseCase;
 
     @Autowired
-    public PostController(CreatePost createPostUseCase, UpdatePostLink updatePostLinkUseCase) {
+    public PostController(CreatePost createPostUseCase, UpdatePostLink updatePostLinkUseCase, CommentPost commentPostUseCase) {
         this.createPostUseCase = createPostUseCase;
         this.updatePostLinkUseCase = updatePostLinkUseCase;
+        this.commentPostUseCase = commentPostUseCase;
     }
 
     @PostMapping
@@ -32,5 +36,11 @@ public class PostController {
     public ResponseEntity<Void> updatePostLink(@RequestBody UpdatePostLinkRequest request, @PathVariable String postTitle) {
         this.updatePostLinkUseCase.updatePostLink(request, postTitle);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{postId}/comment")
+    public ResponseEntity<Void> addCommentPost(@RequestBody CreateCommentRequest request, @PathVariable String postId){
+        this.commentPostUseCase.execute(postId, request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

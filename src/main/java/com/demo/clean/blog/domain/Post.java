@@ -33,6 +33,9 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date postedAt;
 
+    @Column(name = "external_id")
+    private String externalId = UUID.randomUUID().toString();
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostLink> links = new HashSet<>();
 

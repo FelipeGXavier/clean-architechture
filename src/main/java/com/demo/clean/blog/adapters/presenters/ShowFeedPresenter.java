@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ShowFeedPresenter implements Presenter<Page<Post>, ShowFeedResponse> {
 
     @Override
-    public ShowFeedResponse present(Page<Post> response) {
+    public ShowFeedResponse  present(Page<Post> response) {
         var showFeedResponse = new ShowFeedResponse();
         showFeedResponse.setTotal(response.getTotalPages());
         showFeedResponse.setCurrent(response.getNumber());
