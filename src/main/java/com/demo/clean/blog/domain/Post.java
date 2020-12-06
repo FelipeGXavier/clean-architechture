@@ -37,6 +37,7 @@ public class Post {
     private String externalId = UUID.randomUUID().toString();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection(fetch = FetchType.LAZY)
     private Set<PostLink> links = new HashSet<>();
 
     @ManyToOne private Person author;

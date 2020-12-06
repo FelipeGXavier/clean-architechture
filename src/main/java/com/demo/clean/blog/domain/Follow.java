@@ -1,6 +1,7 @@
 package com.demo.clean.blog.domain;
 
 import com.demo.clean.accounting.domain.Person;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,9 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"follower_id", "followed_id"}))
 @Entity
 public class Follow {
 
