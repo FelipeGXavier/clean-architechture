@@ -1,6 +1,6 @@
-package com.demo.clean.person.infra.persistence.converters;
+package com.demo.clean.accounting.infra.persistence.converters;
 
-import com.demo.clean.person.domain.PersonEmail;
+import com.demo.clean.accounting.domain.PersonEmail;
 
 import javax.persistence.AttributeConverter;
 

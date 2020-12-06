@@ -53,4 +53,9 @@ public class PostLink {
     public int hashCode() {
         return Objects.hash(link);
     }
+
+    @Override
+    public String toString() {
+        return link;
+    }
 }

@@ -1,6 +1,6 @@
-package com.demo.clean.person.domain;
+package com.demo.clean.accounting.domain;
 
-import com.demo.clean.person.infra.persistence.converters.PersonEmailConverter;
+import com.demo.clean.accounting.infra.persistence.converters.PersonEmailConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

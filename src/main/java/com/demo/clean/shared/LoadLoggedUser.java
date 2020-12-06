@@ -1,7 +1,7 @@
 package com.demo.clean.shared;
 
-import com.demo.clean.person.domain.Person;
-import com.demo.clean.person.infra.persistence.repositories.PersonRepository;
+import com.demo.clean.accounting.domain.Person;
+import com.demo.clean.accounting.infra.persistence.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +15,10 @@ public class LoadLoggedUser {
         personRepository = repository;
     }
 
-    public static Person load(Long id){
-        return personRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("User not found")
-        );
+    /** Simulate a login-like feature * */
+    public static Person load(Long id) {
+        return personRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }

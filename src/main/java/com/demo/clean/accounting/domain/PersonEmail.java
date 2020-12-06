@@ -1,4 +1,4 @@
-package com.demo.clean.person.domain;
+package com.demo.clean.accounting.domain;
 
 public class PersonEmail {
 

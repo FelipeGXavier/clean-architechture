@@ -2,10 +2,11 @@ package com.demo.clean.blog.post.domain;
 
 import com.demo.clean.blog.post.infra.persistence.converters.PostBodyConverter;
 import com.demo.clean.blog.post.infra.persistence.converters.PostTitleConverter;
-import com.demo.clean.person.domain.Person;
+import com.demo.clean.accounting.domain.Person;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.*;
@@ -26,6 +27,11 @@ public class Post {
     @Convert(converter = PostTitleConverter.class)
     @Column(unique = true, nullable = false)
     private PostTitle title;
+
+    @Column(name = "posted_at")
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postedAt;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostLink> links = new HashSet<>();

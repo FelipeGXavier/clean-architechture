@@ -1,6 +1,6 @@
-package com.demo.clean.person.infra.persistence.repositories;
+package com.demo.clean.accounting.infra.persistence.repositories;
 
-import com.demo.clean.person.domain.Person;
+import com.demo.clean.accounting.domain.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

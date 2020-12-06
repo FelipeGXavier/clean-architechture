@@ -1,6 +1,6 @@
 package com.demo.clean.blog.post.domain;
 
-import com.demo.clean.person.domain.Person;
+import com.demo.clean.accounting.domain.Person;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
