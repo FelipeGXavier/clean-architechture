@@ -16,4 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(value = "select p from Post p where p.externalId = ?1")
     Optional<Post> findByExternalId(String externalId);
+
+    @Query(value = "select p from Post p where p.title = ?1")
+    Optional<Post> findBySlug(PostTitle title);
 }

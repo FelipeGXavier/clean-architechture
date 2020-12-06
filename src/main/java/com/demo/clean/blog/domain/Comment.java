@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -25,9 +26,17 @@ public class Comment {
 
     @ManyToOne private Post post;
 
+    @Column(name = "commented_at")
+    private LocalDateTime commentedAt;
+
     public Comment(CommentBody body, Person person, Post post) {
         this.body = body;
         this.person = person;
         this.post = post;
+    }
+
+    @PrePersist
+    public void addTimestamp(){
+        this.commentedAt = LocalDateTime.now();
     }
 }

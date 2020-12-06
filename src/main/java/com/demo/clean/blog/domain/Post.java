@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
@@ -29,9 +30,7 @@ public class Post {
     private PostTitle title;
 
     @Column(name = "posted_at")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date postedAt;
+    private LocalDateTime postedAt;
 
     @Column(name = "external_id")
     private String externalId = UUID.randomUUID().toString();
@@ -40,12 +39,28 @@ public class Post {
     @ElementCollection(fetch = FetchType.LAZY)
     private Set<PostLink> links = new HashSet<>();
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection(fetch = FetchType.LAZY)
+    private Set<Comment> comments = new HashSet<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection(fetch = FetchType.LAZY)
+    private Set<Favorite> favorites = new HashSet<>();
+
     @ManyToOne private Person author;
 
     public Post(PostBody body, PostTitle title, Person author) {
         this.body = body;
         this.title = title;
         this.author = author;
+    }
+
+    public int getCountFavorites() {
+        return this.favorites.size();
+    }
+
+    public int getCountComments() {
+        return this.comments.size();
     }
 
     public void addLinks(Set<PostLink> links) {
@@ -59,5 +74,10 @@ public class Post {
     public void updateLink(PostLink oldPostLink, PostLink newPostLink) {
         this.links.remove(oldPostLink);
         this.links.add(newPostLink);
+    }
+
+    @PrePersist
+    public void addTimestamp(){
+        this.postedAt = LocalDateTime.now();
     }
 }
