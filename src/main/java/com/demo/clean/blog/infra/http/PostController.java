@@ -28,13 +28,13 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<Void> createPost(@RequestBody CreatePostRequest request) {
-        this.createPostUseCase.createPost(request);
+        this.createPostUseCase.execute(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/{postTitle}")
     public ResponseEntity<Void> updatePostLink(@RequestBody UpdatePostLinkRequest request, @PathVariable String postTitle) {
-        this.updatePostLinkUseCase.updatePostLink(request, postTitle);
+        this.updatePostLinkUseCase.execute(request, postTitle);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

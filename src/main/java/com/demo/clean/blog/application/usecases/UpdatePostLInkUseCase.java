@@ -19,7 +19,7 @@ public class UpdatePostLInkUseCase implements UpdatePostLink {
     }
 
     @Override
-    public void updatePostLink(UpdatePostLinkRequest request, String postTitle) {
+    public void execute(UpdatePostLinkRequest request, String postTitle) {
         var post =
                 this.postRepository
                         .findByAuthorIdAndPostId(request.getUser(), PostTitle.of(postTitle))

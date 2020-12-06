@@ -25,7 +25,7 @@ public class CreatePostUseCase implements CreatePost {
     }
 
     @Override
-    public void createPost(CreatePostRequest request) {
+    public void execute(CreatePostRequest request) {
         var loggedUser = LoadLoggedUser.load(request.getUser());
         var postBody = PostBody.of(request.getBody());
         var postTitle = PostTitle.of(request.getTitle());

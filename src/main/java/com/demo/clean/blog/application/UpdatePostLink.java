@@ -4,5 +4,5 @@ import com.demo.clean.blog.adapters.UpdatePostLinkRequest;
 
 public interface UpdatePostLink {
 
-    void updatePostLink(UpdatePostLinkRequest request, String postTitle);
+    void execute(UpdatePostLinkRequest request, String postTitle);
 }

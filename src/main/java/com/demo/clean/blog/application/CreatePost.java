@@ -4,5 +4,5 @@ import com.demo.clean.blog.adapters.CreatePostRequest;
 
 public interface CreatePost {
 
-    void createPost(CreatePostRequest request);
+    void execute(CreatePostRequest request);
 }
