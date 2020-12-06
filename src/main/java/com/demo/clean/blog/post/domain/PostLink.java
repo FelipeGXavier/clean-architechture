@@ -18,15 +18,17 @@ public class PostLink {
     private Long id;
 
     private String link;
+    @ManyToOne private Post post;
 
     @Transient
     private final String regex =
             "/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)?/gi";
 
-    public PostLink(String link) {
+    public PostLink(String link, Post post) {
         if (!link.matches(regex)) {
             throw new IllegalArgumentException("Invalid link");
         }
         this.link = link;
+        this.post = post;
     }
 }

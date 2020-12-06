@@ -1,12 +1,12 @@
 package com.demo.clean.blog.post.domain;
 
-import com.demo.clean.blog.post.infra.converters.CommentBodyConverter;
+import com.demo.clean.blog.post.infra.persistence.converters.CommentBodyConverter;
+import com.demo.clean.person.domain.Person;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -21,9 +21,10 @@ public class Comment {
     @Convert(converter = CommentBodyConverter.class)
     private CommentBody body;
 
-    private String external_id = UUID.randomUUID().toString();
+    @ManyToOne private Person person;
 
-    public Comment(CommentBody body) {
+    public Comment(CommentBody body, Person person) {
         this.body = body;
+        this.person = person;
     }
 }

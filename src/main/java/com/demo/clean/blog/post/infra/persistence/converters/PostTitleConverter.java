@@ -1,4 +1,4 @@
-package com.demo.clean.blog.post.infra.converters;
+package com.demo.clean.blog.post.infra.persistence.converters;
 
 import com.demo.clean.blog.post.domain.PostTitle;
 

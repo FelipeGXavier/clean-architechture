@@ -1,5 +1,6 @@
 package com.demo.clean.blog.post.domain;
 
+import com.demo.clean.person.domain.Person;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,13 @@ public class Favorite {
 
     @ManyToOne private Post post;
 
+    @OneToOne private Person person;
+
     @Column(name = "favored_at")
     @CreatedDate
     private LocalDateTime favoredAt;
+
+    public Favorite(Post post) {
+        this.post = post;
+    }
 }
