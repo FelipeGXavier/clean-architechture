@@ -1,12 +1,16 @@
 package com.demo.clean.accounting.domain;
 
+import java.util.regex.Pattern;
+
 public class PersonEmail {
 
     private String email;
-    private final String regex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$";
+    private final String regex = "^(.+)@(.+)$";
 
     private PersonEmail(String email) {
-        if (!email.matches(email)) {
+        var pattern = Pattern.compile(regex);
+        var matcher = pattern.matcher(email == null ? "" : email);
+        if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid email");
         }
         this.email = email;
