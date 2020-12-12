@@ -9,7 +9,7 @@ public class CommentBody {
     private String body;
     private final int MAX_LENGTH = 1000;
     private final int MIN_LENGTH = 5;
-    private List<String> filtersWords = new ArrayList<>();
+    private List<String> filtersWords;
 
     private CommentBody(String body) {
         this.setFiltersWords();
@@ -27,7 +27,8 @@ public class CommentBody {
     }
 
     private void setFiltersWords() {
-        new ArrayList<>().addAll(Arrays.asList("foo", "bar", "baz"));
+        this.filtersWords = new ArrayList<>();
+        this.filtersWords.addAll(Arrays.asList("foo", "bar", "baz"));
     }
 
     private boolean clean(String body) {
