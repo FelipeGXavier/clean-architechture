@@ -1,9 +1,9 @@
 package com.demo.clean.demo.blog.integration;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.demo.clean.accounting.domain.Person;
+import com.demo.clean.accounting.domain.PersonEmail;
+import com.demo.clean.accounting.infra.persistence.repositories.PersonRepository;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,14 +16,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private PersonRepository personRepository;
+
+
+    @BeforeAll
+    public void setUp() {
+        var person = new Person(PersonEmail.of("foo@bar.com"), "rot12", "root");
+        this.personRepository.save(person);
+    }
+
     @Test
-    @DisplayName("Create valid post ofr user")
-    @Disabled
+    @DisplayName("Create valid post for user")
     public void validPost() throws Exception {
         var response = this.mockMvc
                 .perform(post("/v1/post").contentType(MediaType.APPLICATION_JSON).content("{\n" +
