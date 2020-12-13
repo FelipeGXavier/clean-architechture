@@ -4,6 +4,7 @@ import com.demo.clean.accounting.adapter.DashboardResponse;
 import com.demo.clean.accounting.adapter.PostPreview;
 import com.demo.clean.accounting.domain.Person;
 import com.demo.clean.blog.domain.Post;
+import com.demo.clean.shared.DomainException;
 import com.demo.clean.shared.Presenter;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +17,11 @@ public class UserDashboardPresenter implements Presenter<Optional<Person>, Dashb
     @Override
     public DashboardResponse present(Optional<Person> response) {
         if (response.isEmpty()) {
-            return DashboardResponse.builder().build();
+            throw new DomainException("User not found");
         }
         var person = response.get();
         var mostRatedPost = person.mostRatedPost();
         var mostRecentPost = person.mostRecentPost();
-        final var baseUrl = "http://localhost:8080/v1/post/%s";
         var dashboard = DashboardResponse.builder().login(person.getLogin())
                 .mostRatedPost(this.assignPost(mostRatedPost))
                 .mostRecentPost(this.assignPost(mostRecentPost))

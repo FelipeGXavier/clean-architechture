@@ -32,13 +32,13 @@ public class Person {
     private String login;
     private String password;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "followed")
+    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL)
     private List<Follow> followers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Favorite> favorites = new ArrayList<>();
 
     public Person(PersonEmail email, String login, String password) {
@@ -56,14 +56,14 @@ public class Person {
     }
 
     public Optional<Post> mostRecentPost() {
-        if(this.posts.isEmpty()){
+        if (this.posts.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(Collections.max(this.posts, Comparator.comparing(Post::getPostedAt)));
     }
 
     public Optional<Post> mostRatedPost() {
-        if(this.posts.isEmpty()){
+        if (this.posts.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(Collections.max(this.posts, Comparator.comparing(Post::getCountFavorites)));
