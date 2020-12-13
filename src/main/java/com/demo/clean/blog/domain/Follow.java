@@ -1,6 +1,7 @@
 package com.demo.clean.blog.domain;
 
 import com.demo.clean.accounting.domain.Person;
+import com.demo.clean.shared.DomainException;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class Follow {
 
     public Follow(Person follower, Person followed) {
         if (followed.getId().equals(follower.getId())) {
-            throw new IllegalArgumentException("You can't follow yourself");
+            throw new DomainException("You can't follow yourself");
         }
         this.follower = follower;
         this.followed = followed;

@@ -2,6 +2,7 @@ package com.demo.clean.demo.blog.unit;
 
 import com.demo.clean.blog.domain.PostBody;
 import com.demo.clean.blog.domain.PostTitle;
+import com.demo.clean.shared.DomainException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ public class PostTitleTest {
     @DisplayName("Null title")
     public void nullBody() {
         String body = null;
-        var exception = assertThrows(IllegalArgumentException.class, () -> PostTitle.of(body));
+        var exception = assertThrows(DomainException.class, () -> PostTitle.of(body));
         assertEquals(exception.getMessage(), "Invalid title");
     }
 
@@ -30,7 +31,7 @@ public class PostTitleTest {
     @DisplayName("Title without minimum length required")
     public void withoutMinLength() {
         String body = "";
-        var exception = assertThrows(IllegalArgumentException.class, () -> PostTitle.of(body));
+        var exception = assertThrows(DomainException.class, () -> PostTitle.of(body));
         assertEquals(exception.getMessage(), "Invalid title");
     }
 
@@ -38,7 +39,7 @@ public class PostTitleTest {
     @DisplayName("Title exceeding maximum length")
     public void exceedMaxLength() {
         String body = "IrOuILxOhasVxO7aLsQ1qf2NpcolL5avKgrqxbOaSLwrXhYtwza";
-        var exception = assertThrows(IllegalArgumentException.class, () -> PostTitle.of(body));
+        var exception = assertThrows(DomainException.class, () -> PostTitle.of(body));
         assertEquals(exception.getMessage(), "Invalid title");
     }
 }

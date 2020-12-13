@@ -1,5 +1,7 @@
 package com.demo.clean.accounting.domain;
 
+import com.demo.clean.shared.DomainException;
+
 import java.util.regex.Pattern;
 
 public class PersonEmail {
@@ -11,7 +13,7 @@ public class PersonEmail {
         var pattern = Pattern.compile(regex);
         var matcher = pattern.matcher(email == null ? "" : email);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid email");
+            throw new DomainException("Invalid email");
         }
         this.email = email;
     }

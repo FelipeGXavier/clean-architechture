@@ -1,5 +1,6 @@
 package com.demo.clean.blog.domain;
 
+import com.demo.clean.shared.DomainException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class PostLink {
 
     public PostLink(String link, Post post) {
         if (!this.validUrl(link)) {
-            throw new IllegalArgumentException("Invalid url");
+            throw new DomainException("Invalid url");
         }
         this.link = link;
         this.post = post;

@@ -1,5 +1,7 @@
 package com.demo.clean.blog.domain;
 
+import com.demo.clean.shared.DomainException;
+
 public class PostTitle {
 
     private String title;
@@ -8,7 +10,7 @@ public class PostTitle {
 
     private PostTitle(String title) {
         if (title == null || title.length() > MAX_LENGTH || title.length() < MIN_LENGTH) {
-            throw new IllegalArgumentException("Invalid title");
+            throw new DomainException("Invalid title");
         }
         this.title = title;
     }

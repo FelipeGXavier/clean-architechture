@@ -5,6 +5,7 @@ import com.demo.clean.blog.adapters.presenters.ShowPostPresenter;
 import com.demo.clean.blog.application.ShowPostDetails;
 import com.demo.clean.blog.domain.PostTitle;
 import com.demo.clean.blog.infra.persistence.repositories.PostRepository;
+import com.demo.clean.shared.DomainException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +22,7 @@ public class ShowPostDetailsUseCase implements ShowPostDetails {
     @Override
     public ShowPostResponse execute(String title) {
         var post = this.postRepository.findBySlug(PostTitle.of(title)).orElseThrow(() -> {
-            throw new IllegalArgumentException("Post not found");
+            throw new DomainException("Post not found");
         });
         return this.presenter.present(post);
     }

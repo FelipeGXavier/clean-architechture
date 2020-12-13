@@ -1,5 +1,7 @@
 package com.demo.clean.blog.domain;
 
+import com.demo.clean.shared.DomainException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +19,7 @@ public class CommentBody {
                 || body.length() > MAX_LENGTH
                 || body.length() < MIN_LENGTH
                 || !this.clean(body)) {
-            throw new IllegalArgumentException("Invalid Comment body");
+            throw new DomainException("Invalid Comment body");
         }
         this.body = body;
     }

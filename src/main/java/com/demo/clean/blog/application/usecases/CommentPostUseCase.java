@@ -6,6 +6,7 @@ import com.demo.clean.blog.domain.Comment;
 import com.demo.clean.blog.domain.CommentBody;
 import com.demo.clean.blog.infra.persistence.repositories.CommentRepository;
 import com.demo.clean.blog.infra.persistence.repositories.PostRepository;
+import com.demo.clean.shared.DomainException;
 import com.demo.clean.shared.LoadLoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class CommentPostUseCase implements CommentPost {
     @Override
     public void execute(String postId, CreateCommentRequest request) {
         var post = this.postRepository.findByExternalId(postId).orElseThrow(() -> {
-            throw new IllegalArgumentException("Post not found");
+            throw new DomainException("Post not found");
         });
         var commentBody = CommentBody.of(request.getBody());
         var loggedUser = LoadLoggedUser.load(request.getUserId());

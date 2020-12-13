@@ -1,6 +1,7 @@
 package com.demo.clean.demo.accounting.unit;
 
 import com.demo.clean.accounting.domain.PersonEmail;
+import com.demo.clean.shared.DomainException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class PersonEmailTest {
     @DisplayName("Invalid e-mail for user")
     public void invalidEmail() {
         var email = "foobar.com";
-        var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> PersonEmail.of(email));
+        var exception = Assertions.assertThrows(DomainException.class, () -> PersonEmail.of(email));
         assertEquals(exception.getMessage(), "Invalid email");
     }
 
@@ -28,7 +29,7 @@ public class PersonEmailTest {
     @DisplayName("Null e-mail for user")
     public void nullEmail() {
         String email = null;
-        var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> PersonEmail.of(email));
+        var exception = Assertions.assertThrows(DomainException.class, () -> PersonEmail.of(email));
         assertEquals(exception.getMessage(), "Invalid email");
     }
 }

@@ -5,6 +5,7 @@ import com.demo.clean.blog.application.UpdatePostLink;
 import com.demo.clean.blog.domain.PostLink;
 import com.demo.clean.blog.domain.PostTitle;
 import com.demo.clean.blog.infra.persistence.repositories.PostRepository;
+import com.demo.clean.shared.DomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class UpdatePostLInkUseCase implements UpdatePostLink {
                         .findByAuthorIdAndPostId(request.getUser(), PostTitle.of(postTitle))
                         .orElseThrow(
                                 () -> {
-                                    throw new IllegalArgumentException("Invalid user or post");
+                                    throw new DomainException("Invalid user or post");
                                 });
         var oldPostLink = new PostLink(request.getOldLink(), post);
         var newPostLink = new PostLink(request.getLink(), post);

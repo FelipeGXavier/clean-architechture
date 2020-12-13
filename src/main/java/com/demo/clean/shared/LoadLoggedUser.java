@@ -19,6 +19,6 @@ public class LoadLoggedUser {
     public static Person load(Long id) {
         return personRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new DomainException("User not found"));
     }
 }

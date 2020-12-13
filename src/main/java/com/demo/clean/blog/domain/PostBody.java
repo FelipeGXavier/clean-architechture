@@ -1,5 +1,7 @@
 package com.demo.clean.blog.domain;
 
+import com.demo.clean.shared.DomainException;
+
 public class PostBody {
 
     private String body;
@@ -8,7 +10,7 @@ public class PostBody {
 
     private PostBody(String body) {
         if (body == null || body.length() < MIN_LENGTH || body.length() > MAX_LENGTH) {
-            throw new IllegalArgumentException("Invalid body");
+            throw new DomainException("Invalid body");
         }
         this.body = body;
     }
